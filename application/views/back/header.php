@@ -155,10 +155,10 @@
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('BController/checkbooking')?>">ข้อมูลการจอง</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/bookingonline')?>">ข้อมูลการจอง</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/')?>">ตรวจสอบการเข้าพัก</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/paymentonline')?>">ตรวจสอบการชำระเงิน</a>
                                     </li>
                                 </ul>
                             </div>

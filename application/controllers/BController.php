@@ -22,4 +22,11 @@ class BController extends CI_Controller
         $this->load->view('back/bookingonline/bookingonline',$data);
         $this->load->view('back/footer');
     }
+    function paymentonline()
+    {
+        $data['payonline'] = $this->BQueryModel->paymentonline();
+        $this->load->view('back/header');
+        $this->load->view('back/paymentonline/paymentonline',$data);
+        $this->load->view('back/footer');
+    }
 }

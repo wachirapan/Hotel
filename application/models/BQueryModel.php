@@ -16,4 +16,16 @@ class BQueryModel extends CI_Model
             ->where('book_status',1)
             ->get()->result();
     }
+    function paymentonline()
+    {
+        return $this->db->select('*')->from('booking')
+            ->join('room','booking.room_id = room.room_id')
+            ->join('customer','booking.cs_id = customer.cs_id')
+            ->where('book_status',2)
+            ->get()->result();
+    }
+    function getdetailpayonline($id)
+    {
+        return $this->db->select('*')->from('bookingpayment')->get()->result();
+    }
 }

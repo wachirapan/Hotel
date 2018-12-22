@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2018 at 09:09 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- Generation Time: Dec 22, 2018 at 04:52 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,40 +25,87 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Table structure for table `booking`
 --
 
-CREATE TABLE `category` (
-  `ct_id` int(2) NOT NULL,
-  `ct_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE `booking` (
+  `book_id` int(11) NOT NULL,
+  `cs_id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `book_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `book_status` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `booking`
 --
 
-INSERT INTO `category` (`ct_id`, `ct_name`) VALUES
-(1, 'พนักงาน'),
-(2, 'ผู้เช่า');
+INSERT INTO `booking` (`book_id`, `cs_id`, `room_id`, `book_date`, `book_status`) VALUES
+(2, 2, 1, '2018-12-21 14:55:42', 1),
+(3, 3, 2, '2018-12-21 15:28:33', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoryroom`
+-- Table structure for table `bookingpayment`
 --
 
-CREATE TABLE `categoryroom` (
-  `ctr_id` int(11) NOT NULL,
-  `ctr_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE `bookingpayment` (
+  `bp_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `bp_file` text COLLATE utf8_unicode_ci NOT NULL,
+  `bp_dateset` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `bp_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `categoryroom`
+-- Dumping data for table `bookingpayment`
 --
 
-INSERT INTO `categoryroom` (`ctr_id`, `ctr_name`) VALUES
-(1, 'รายเดือน'),
-(2, 'รายวัน');
+INSERT INTO `bookingpayment` (`bp_id`, `book_id`, `bp_file`, `bp_dateset`, `bp_date`) VALUES
+(2, 3, '7-11-Slip2.jpg', '1231565', '2018-12-21 15:28:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `changeroom`
+--
+
+CREATE TABLE `changeroom` (
+  `ch_id` int(11) NOT NULL,
+  `ch_detail` text COLLATE utf8_unicode_ci NOT NULL,
+  `ch_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `room_id` int(11) NOT NULL,
+  `ch_status` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `changeroom`
+--
+
+INSERT INTO `changeroom` (`ch_id`, `ch_detail`, `ch_date`, `room_id`, `ch_status`) VALUES
+(1, 'test', '2018-12-21 16:22:39', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkout`
+--
+
+CREATE TABLE `checkout` (
+  `co_id` int(11) NOT NULL,
+  `co_text` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `co_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `room_id` int(11) NOT NULL,
+  `co_status` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `checkout`
+--
+
+INSERT INTO `checkout` (`co_id`, `co_text`, `co_date`, `room_id`, `co_status`) VALUES
+(1, '12/05/2530', '2018-12-21 16:08:40', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -67,104 +114,21 @@ INSERT INTO `categoryroom` (`ctr_id`, `ctr_name`) VALUES
 --
 
 CREATE TABLE `customer` (
-  `cus_id` int(11) NOT NULL,
-  `cus_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `cus_lastname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `cus_phone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `cus_idcard` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `cus_username` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `cus_pwd` varchar(25) COLLATE utf8_unicode_ci NOT NULL
+  `cs_id` int(11) NOT NULL,
+  `cs_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `cs_idcard` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `cs_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `cs_user` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `cs_pwd` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`cus_id`, `cus_name`, `cus_lastname`, `cus_phone`, `cus_idcard`, `cus_username`, `cus_pwd`) VALUES
-(1, '', '', '', '', 'user', 'user');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `managementroom`
---
-
-CREATE TABLE `managementroom` (
-  `ma_id` int(11) NOT NULL,
-  `cus_id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL,
-  `ma_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ma_status` int(1) NOT NULL,
-  `ma_checkpay` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `otherinformation`
---
-
-CREATE TABLE `otherinformation` (
-  `oti_id` int(11) NOT NULL,
-  `oti_fire` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `oti_water` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `ma_id` int(11) NOT NULL,
-  `oti_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `oti_status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `outofhotel`
---
-
-CREATE TABLE `outofhotel` (
-  `ofh_id` int(11) NOT NULL,
-  `ofh_detail` text COLLATE utf8_unicode_ci NOT NULL,
-  `ofh_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ma_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `outstanding`
---
-
-CREATE TABLE `outstanding` (
-  `out_id` int(11) NOT NULL,
-  `pay_id` int(11) NOT NULL,
-  `put_pay` int(7) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payment`
---
-
-CREATE TABLE `payment` (
-  `pay_id` int(11) NOT NULL,
-  `ma_id` int(11) NOT NULL,
-  `pay_price` int(9) NOT NULL,
-  `pay_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `pay_status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `repair`
---
-
-CREATE TABLE `repair` (
-  `rp_id` int(11) NOT NULL,
-  `ma_id` int(11) NOT NULL,
-  `rp_detail` text COLLATE utf8_unicode_ci NOT NULL,
-  `rp_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `rp_status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO `customer` (`cs_id`, `cs_name`, `cs_idcard`, `cs_phone`, `cs_user`, `cs_pwd`) VALUES
+(2, 'wachirapan pimpa ', '123456789', '12345', 'user', 'user'),
+(3, 'wachirapan pimpa', '12345', '12354', 'user1', 'user1');
 
 -- --------------------------------------------------------
 
@@ -174,111 +138,52 @@ CREATE TABLE `repair` (
 
 CREATE TABLE `room` (
   `room_id` int(11) NOT NULL,
-  `room_name` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `room_price` int(5) NOT NULL,
-  `room_detail` text COLLATE utf8_unicode_ci NOT NULL,
-  `ctr_id` int(4) NOT NULL,
-  `room_status` int(1) NOT NULL
+  `room_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `room_price` int(11) NOT NULL,
+  `room_status` varchar(2) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`room_id`, `room_name`, `room_price`, `room_detail`, `ctr_id`, `room_status`) VALUES
-(1, '101', 2500, 'พัดลม', 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roompricebill`
---
-
-CREATE TABLE `roompricebill` (
-  `rpb_id` int(11) NOT NULL,
-  `ma_id` int(11) NOT NULL,
-  `rpb_price` int(7) NOT NULL,
-  `rpb_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `staff`
---
-
-CREATE TABLE `staff` (
-  `st_id` int(11) NOT NULL,
-  `st_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `st_lastname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `st_username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `st_pwd` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `staff`
---
-
-INSERT INTO `staff` (`st_id`, `st_name`, `st_lastname`, `st_username`, `st_pwd`) VALUES
-(1, '', '', 'admin', 'admin');
+INSERT INTO `room` (`room_id`, `room_name`, `room_price`, `room_status`) VALUES
+(1, '101', 3500, 'n'),
+(2, '102', 3500, 'n');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `category`
+-- Indexes for table `booking`
 --
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`ct_id`);
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`book_id`);
 
 --
--- Indexes for table `categoryroom`
+-- Indexes for table `bookingpayment`
 --
-ALTER TABLE `categoryroom`
-  ADD PRIMARY KEY (`ctr_id`);
+ALTER TABLE `bookingpayment`
+  ADD PRIMARY KEY (`bp_id`);
+
+--
+-- Indexes for table `changeroom`
+--
+ALTER TABLE `changeroom`
+  ADD PRIMARY KEY (`ch_id`);
+
+--
+-- Indexes for table `checkout`
+--
+ALTER TABLE `checkout`
+  ADD PRIMARY KEY (`co_id`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`cus_id`);
-
---
--- Indexes for table `managementroom`
---
-ALTER TABLE `managementroom`
-  ADD PRIMARY KEY (`ma_id`);
-
---
--- Indexes for table `otherinformation`
---
-ALTER TABLE `otherinformation`
-  ADD PRIMARY KEY (`oti_id`);
-
---
--- Indexes for table `outofhotel`
---
-ALTER TABLE `outofhotel`
-  ADD PRIMARY KEY (`ofh_id`);
-
---
--- Indexes for table `outstanding`
---
-ALTER TABLE `outstanding`
-  ADD PRIMARY KEY (`out_id`);
-
---
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`pay_id`);
-
---
--- Indexes for table `repair`
---
-ALTER TABLE `repair`
-  ADD PRIMARY KEY (`rp_id`);
+  ADD PRIMARY KEY (`cs_id`);
 
 --
 -- Indexes for table `room`
@@ -287,92 +192,44 @@ ALTER TABLE `room`
   ADD PRIMARY KEY (`room_id`);
 
 --
--- Indexes for table `roompricebill`
---
-ALTER TABLE `roompricebill`
-  ADD PRIMARY KEY (`rpb_id`);
-
---
--- Indexes for table `staff`
---
-ALTER TABLE `staff`
-  ADD PRIMARY KEY (`st_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT for table `booking`
 --
-ALTER TABLE `category`
-  MODIFY `ct_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `booking`
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `categoryroom`
+-- AUTO_INCREMENT for table `bookingpayment`
 --
-ALTER TABLE `categoryroom`
-  MODIFY `ctr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `bookingpayment`
+  MODIFY `bp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `changeroom`
+--
+ALTER TABLE `changeroom`
+  MODIFY `ch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `checkout`
+--
+ALTER TABLE `checkout`
+  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `managementroom`
---
-ALTER TABLE `managementroom`
-  MODIFY `ma_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `otherinformation`
---
-ALTER TABLE `otherinformation`
-  MODIFY `oti_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `outofhotel`
---
-ALTER TABLE `outofhotel`
-  MODIFY `ofh_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `outstanding`
---
-ALTER TABLE `outstanding`
-  MODIFY `out_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `pay_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `repair`
---
-ALTER TABLE `repair`
-  MODIFY `rp_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `roompricebill`
---
-ALTER TABLE `roompricebill`
-  MODIFY `rpb_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `staff`
---
-ALTER TABLE `staff`
-  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

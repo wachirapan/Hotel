@@ -46,4 +46,35 @@ class QueryModel extends CI_Model
             ->where('booking.cs_id',$this->session->userdata('customer_login'))
             ->get()->result();
     }
+    function closebillonline()
+    {
+        return $this->db->select('*')->from('openbill')
+            ->join('booking','openbill.booking_id = booking.book_id')
+            ->join('room','booking.room_id = room.room_id')
+            ->where('booking.cs_id',$this->session->userdata('customer_login'))
+            ->where('opb_status ',1 )
+            ->or_where('opb_status',3)
+            ->get()->result();
+    }
+    function countbillcomplete()
+    {
+        return $this->db->select('*')->from('openbill')
+            ->join('booking','openbill.booking_id = booking.book_id')
+            ->where('booking.cs_id',$this->session->userdata('customer_login'))
+            ->where('opb_status ',2)
+            ->get()->num_rows();
+    }
+    function getcompletebill($index)
+    {
+        $length = 12;
+        $start = ($index - 1) * $length;
+
+        return $this->db->select('*')->from('openbill')
+            ->join('booking','openbill.booking_id = booking.book_id')
+            ->join('room','booking.room_id = room.room_id')
+            ->where('booking.cs_id',$this->session->userdata('customer_login'))
+            ->where('opb_status ',2)
+            ->limit($length, $start)
+            ->get()->result();
+    }
 }

@@ -28,4 +28,9 @@ class InsertModel extends CI_Model
     function paymentbooking($data1 = array()){
         $this->db->insert('bookingpayment',$data1);
     }
+    function insertcheckincounter($data = array())
+    {
+        $this->db->insert('customer',$data);
+        return $this->db->insert_id();
+    }
 }

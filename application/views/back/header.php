@@ -168,10 +168,10 @@
                             <div id="submenu-3" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/manageformount')?>">เข้าพัก</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/checkinonline')?>">เข้าพักจองออนไลน์</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/paymanageformount')?>">ชำระเข้าพัก</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/checkin')?>">เข้าพัก</a>
                                     </li>
 
                                 </ul>
@@ -182,20 +182,17 @@
                             <div id="submenu-4" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/changeroom')?>">ขอย้ายห้อง</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/tranferchangeroom')?>">ชำระเงิน</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/changeroom')?>">ขอย้ายห้อง</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-f fa-folder"></i>แจ้งซ่อมอุปกรณ์</a>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-f fa-folder"></i>แจ้งออก</a>
                             <div id="submenu-5" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/macanicroom')?>">ข้อมูลแจ้งซ่อม</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/checkoutroom')?>">แจ้งออก</a>
                                     </li>
                                 </ul>
                             </div>
@@ -205,29 +202,13 @@
                             <div id="submenu-10" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/createbill')?>">ออกบิลค่าห้อง</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/openbill')?>">ออกบิลค่าห้อง</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/pricecash')?>">รับชำระเงิน</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> สมาชิก </a>
-                            <div id="submenu-6" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('ForCustomer/profile')?>">ประวัติส่วนตัว</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/closebillonline')?>">รับชำระเงินโอน</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('ForCustomer/createmacanic')?>">แจ้งซ่อม</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('ForCustomer/outofhotel')?>">แจ้งออก</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('ForCustomer/roomcash')?>">ค่าหอพัก</a>
+                                        <a class="nav-link" href="<?php echo site_url('BController/closebill')?>">รับชำระเงิน</a>
                                     </li>
                                 </ul>
                             </div>
@@ -242,7 +223,7 @@
                             <div id="submenu-7" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('welcome/reportsale')?>">รายได้</a>
+                                        <a class="nav-link" href="<?php echo site_url('Report/revenue')?>">รายได้</a>
                                     </li>
 
                                 </ul>

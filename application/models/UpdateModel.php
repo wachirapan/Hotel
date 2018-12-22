@@ -11,4 +11,8 @@ class UpdateModel extends CI_Model
     function updateroom($data =array(), $roomid){
         $this->db->where('room_id',$roomid)->update('room',$data);
     }
+    function updatecheckinonline($data = array(), $id)
+    {
+        $this->db->where('book_id',$id)->update('booking',$data);
+    }
 }

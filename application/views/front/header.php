@@ -40,8 +40,8 @@
                 <?php }else{?>
                     <li class="nav-item"><a href="<?php echo site_url('welcome/payment')?>" class="nav-link">ค่าจอง</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('Logincustomer/logout')?>" class="nav-link">ล็อคเอ้า</a></li>
-                    <li class="nav-item"><a href="<?php echo site_url('welcome/')?>" class="nav-link">ค่าหอ</a></li>
-                    <li class="nav-item"><a href="<?php echo site_url('welcome/')?>" class="nav-link">ย้อนหลัง</a></li>
+                    <li class="nav-item"><a href="<?php echo site_url('welcome/closebillonline')?>" class="nav-link">ค่าหอ</a></li>
+                    <li class="nav-item"><a href="<?php echo site_url('welcome/completebill')?>" class="nav-link">ย้อนหลัง</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('welcome/checkoutroom')?>" class="nav-link">แจ้งออก</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('welcome/changeroom')?>" class="nav-link">แจ้งย้าย</a></li>
                 <?php }?>

@@ -21,4 +21,8 @@ class DeleteData extends CI_Controller
         $this->db->where('book_id',$this->input->post('id'))->delete('booking');
 
     }
+    function delopenbil()
+    {
+        $this->db->where('opb_id',$this->input->get('opb_id'))->delete('openbill');
+    }
 }

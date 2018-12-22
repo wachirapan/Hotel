@@ -9,7 +9,8 @@
                     <td>สถานะ</td>
                 </tr>
                 <tbody>
-                <?php foreach($change as $item){?>
+                <?php
+                foreach($change as $item){ ?>
                 <tr>
                     <td><?=$item->cs_name?></td>
                     <td><?=$item->room_name?></td>

@@ -23,8 +23,8 @@
                             echo "รอการตรจสอบ";
                         }else if($item->book_status == 3){
                             echo "รอการเข้าพัก";
-                        }else{
-                            echo "ข้อมูลมีปัญหาติดต่อหอพัก";
+                        }else if($item->book_status == 4){
+                            echo "เข้าพักเรียบร้อย";
                         }?></td>
 
                 </tr>
